@@ -20,7 +20,7 @@ form.addEventListener("submit", (e) => {
   } else {
     // Query the rest API
     cryptoAPI.queryAPI(currencySelect, cryptoCurrencySelect).then((data) => {
-      console.log(data);
+      ui.displayResult(data.result);
     });
   }
 });

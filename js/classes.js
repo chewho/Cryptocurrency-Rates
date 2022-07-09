@@ -16,7 +16,7 @@ class UI {
       cryptoCurrencies.forEach((currency) => {
         // Add the <option>
         const option = document.createElement("option");
-        option.value = currency.id;
+        option.value = currency.symbol;
         option.appendChild(document.createTextNode(currency.name));
         select.appendChild(option);
       });
@@ -35,6 +35,17 @@ class UI {
     setTimeout(() => {
       document.querySelector(".messages div").remove();
     }, 2000);
+  }
+
+  // Prints the result of the valuation / rate
+  displayResult(result) {
+    console.log(result);
+    let HTMLTemplate = "";
+    HTMLTemplate += `
+    <h3>Result:</h3>
+    <p>The price of ${result.name} is ${result.price}</p>`;
+    const divResult = document.querySelector("#result");
+    divResult.innerHTML = HTMLTemplate;
   }
 }
 
