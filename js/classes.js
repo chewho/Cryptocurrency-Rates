@@ -39,13 +39,39 @@ class UI {
 
   // Prints the result of the valuation / rate
   displayResult(result) {
-    console.log(result);
+    // Remove the previos result
+    const prevResult = document.querySelector("#result > div");
+    if (prevResult) {
+      prevResult.remove();
+    }
+
     let HTMLTemplate = "";
     HTMLTemplate += `
-    <h3>Result:</h3>
-    <p>The price of ${result.name} is ${result.price}</p>`;
-    const divResult = document.querySelector("#result");
-    divResult.innerHTML = HTMLTemplate;
+    <div>
+      <h3>Result:</h3>
+      <p>The price of ${result.name} in ${currency.value} is ${result.price}</p>
+      <p>Last hour: ${result.delta_1h}%</p>
+      <p>Last day: ${result.delta_24h}%</p>
+      <p>Last week: ${result.delta_7d}%</p>
+    </div>`;
+
+    // Prints the spinner
+    this.showSpinner();
+
+    setTimeout(() => {
+      const divResult = document.querySelector("#result");
+      divResult.innerHTML = HTMLTemplate;
+
+      // Hide the spinner
+      document.querySelector(".spinner img").remove();
+    }, 2000);
+  }
+
+  // Prints the spinner
+  showSpinner() {
+    const spinnerGIF = document.createElement("img");
+    spinnerGIF.src = "img/spinner.gif";
+    document.querySelector(".spinner").appendChild(spinnerGIF);
   }
 }
 
